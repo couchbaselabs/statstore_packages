@@ -25,24 +25,27 @@ To use this package, change your HTTP handler functions to use this signature:
 
 Register them in the usual way, wrapping them with NewHandler.
 
+Classic App Engine packages are available at https://godoc.org/gopkg.in/mjibson/v1/appstats.
+
 
 Example
 
 This is a small example using this package.
 
+	package main
+
 	import (
 		"net/http"
 
-		"appengine"
-
 		"github.com/mjibson/appstats"
+		"golang.org/x/net/context"
 	)
 
 	func init() {
 		http.Handle("/", appstats.NewHandler(Main))
 	}
 
-	func Main(c appengine.Context, w http.ResponseWriter, r *http.Request) {
+	func Main(c context.Context, w http.ResponseWriter, r *http.Request) {
 		// do stuff with c: datastore.Get(c, key, entity)
 		w.Write([]byte("success"))
 	}
